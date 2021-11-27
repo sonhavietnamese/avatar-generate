@@ -18,7 +18,7 @@
     ctx.fillStyle = canvasBackgroundColor
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-    await loadImage('images/body.png').then((image) => {
+    await loadImage('assets/body.png').then((image) => {
         ctx.drawImage(
             image,
             bodyPosition.x,
@@ -28,7 +28,7 @@
         )
     })
 
-    await loadImage('images/hair.png').then((image) => {
+    await loadImage('assets/hair/hair.png').then((image) => {
         ctx.drawImage(
             image,
             hairPosition.x,
@@ -38,7 +38,7 @@
         )
     })
 
-    await loadImage('images/face.png').then((image) => {
+    await loadImage('assets/face/face.png').then((image) => {
         ctx.drawImage(
             image,
             facePosition.x,
@@ -48,7 +48,7 @@
         )
     })
 
-    await loadImage('images/nose.png').then((image) => {
+    await loadImage('assets/nose/nose.png').then((image) => {
         ctx.drawImage(
             image,
             nosePosition.x,
@@ -58,7 +58,7 @@
         )
     })
 
-    await loadImage('images/mouth.png').then((image) => {
+    await loadImage('assets/mouth/mouth.png').then((image) => {
         ctx.drawImage(
             image,
             mouthPosition.x,
