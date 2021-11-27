@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "format": "prettier --write src/*.js",
-    "lint": "eslint src/*.js --fix",
+    "format": "prettier --write src/**/*.js",
+    "lint": "eslint src/**/*.js --fix",
     "postinstall": "husky install"
   },
   "lint-staged": {
