@@ -1,0 +1,25 @@
+{
+  "name": "canvas2image",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "pretty": "lint-staged"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.8.0"
+  },
+  "lint-staged": {
+    "src/*.js": "prettier --single-quote --trailing-comma all --tab-width 4 --no-semi --write"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.5.0"
+  }
+}
