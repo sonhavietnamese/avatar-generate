@@ -6,7 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "pretty": "lint-staged"
+    "format": "prettier --write src/*.js",
+    "lint": "eslint src/*.js --fix",
+    "postinstall": "husky install"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run format",
+      "npm run lint",
+      "git add ."
+    ]
   },
   "keywords": [],
   "author": "",
@@ -14,15 +23,10 @@
   "dependencies": {
     "canvas": "^2.8.0"
   },
-  "lint-staged": {
-    "src/*.js": "prettier --single-quote --trailing-comma all --tab-width 4 --no-semi --write"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.0"

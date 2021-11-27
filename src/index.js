@@ -1,12 +1,12 @@
-;(async () => {
+(async () => {
     const fs = require('fs')
     const { createCanvas, loadImage } = require('canvas')
 
-const canvasWidth = 361
+    const canvasWidth = 361
     const canvasHeight = 361
     const canvasBackgroundColor = '#FF0000'
 
-    const bodyPosition = { x: 87, y: 270      }
+    const bodyPosition = { x: 87, y: 270 }
     const hairPosition = { x: 87, y: 69 }
     const facePosition = { x: 123, y: 122 }
     const nosePosition = { x: 176, y: 184 }
@@ -70,5 +70,4 @@ const canvasWidth = 361
 
     const imageBuffer = canvas.toDataURL()
     fs.writeFileSync('./canvas.png', imageBuffer)
-    console.log(imageBuffer)
 })()
