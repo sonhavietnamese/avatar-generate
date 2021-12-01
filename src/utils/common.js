@@ -1,26 +1,51 @@
+import pkg from 'canvas'
+import source from '../constants/global.js'
+
 // const fs = require('fs')
 // const { createCanvas, loadImage } = require('canvas')
+const { createCanvas, loadImage } = pkg
 
 // let keysForRandom = []
 // const result = {}
 // const keys = []
 // const values = []
 
-// function generate() {
-//     const backgrounds = ['BG_1', 'BG_2', 'BG_3']
-//     const noses = ['NOSE_1', 'NOSE_2', 'NOSE_3']
-//     const hairs = ['HAIR_1', 'HAIR_2', 'HAIR_3']
+// function getFileName(s) {
+//     return s.split('/')[2].split('.')[0]
+// }
 
-//     for (const background of backgrounds) {
-//         for (const nose of noses) {
-//             for (const hair of hairs) {
-//                 const backgroundIndex = background.split('_')[1]
-//                 const noseIndex = nose.split('_')[1]
-//                 const hairIndex = hair.split('_')[1]
-//                 const keyTemp = backgroundIndex + noseIndex + hairIndex
-//                 const valueTemp = [background, nose, hair]
-//                 keys.push(keyTemp)
-//                 values.push(valueTemp)
+// function generate() {
+//     for (const body of source.bodies) {
+//         for (const nose of source.noses) {
+//             for (const hair of source.hairs) {
+//                 for (const face of source.faces) {
+//                     for (const mouth of source.mouths) {
+//                         for (const eye of source.eyes) {
+//                             const bodyFileName = getFileName(body)
+//                             const noseFileName = getFileName(nose)
+//                             const hairFileName = getFileName(hair)
+//                             const faceFileName = getFileName(face)
+//                             const mouthFileName = getFileName(mouth)
+//                             const eyeFileName = getFileName(eye)
+
+//                             const bodyIndex = bodyFileName.split('_')[1]
+//                             const noseIndex = noseFileName.split('_')[1]
+//                             const hairIndex = hairFileName.split('_')[1]
+//                             const faceIndex = faceFileName.split('_')[1]
+//                             const mouthIndex = mouthFileName.split('_')[1]
+//                             const eyeIndex = eyeFileName.split('_')[1]
+//                             const keyTemp = bodyIndex
+//                                 + noseIndex
+//                                 + hairIndex
+//                                 + faceIndex
+//                                 + mouthIndex
+//                                 + eyeIndex
+//                             const valueTemp = [body, nose, hair, face, mouth, eye]
+//                             keys.push(keyTemp)
+//                             values.push(valueTemp)
+//                         }
+//                     }
+//                 }
 //             }
 //         }
 //     }
@@ -32,81 +57,113 @@
 //     keysForRandom = [...keys]
 // }
 
-// function random() {
-//     generate()
-//     const index = Math.floor(Math.random() * (keysForRandom.length - 0)) + 0
-//     const model = result[keysForRandom[index]]
-//     delete result[keysForRandom[index]]
-//     return model
-// }
+function random() {
+    // generate()
+    // const index = Math.floor(Math.random() * (keysForRandom.length - 0)) + 0
+    // const model = result[keysForRandom[index]]
+    // delete result[keysForRandom[index]]
+    const bodyPath = source.bodies[Math.floor(Math.random() * source.bodies.length)]
+    const eyePath = source.eyes[Math.floor(Math.random() * source.eyes.length)]
+    const hairPath = source.hairs[Math.floor(Math.random() * source.hairs.length)]
+    const nosePath = source.noses[Math.floor(Math.random() * source.noses.length)]
+    const facePath = source.faces[Math.floor(Math.random() * source.faces.length)]
+    const mouthPath = source.mouths[Math.floor(Math.random() * source.mouths.length)]
 
-// async function createAvatar() {
-//     const canvasWidth = 361
-//     const canvasHeight = 361
-//     const canvasBackgroundColor = '#FF0000'
+    const model = [bodyPath, nosePath, hairPath, facePath, mouthPath, eyePath]
 
-//     const bodyPosition = { x: 87, y: 270 }
-//     const hairPosition = { x: 87, y: 69 }
-//     const facePosition = { x: 123, y: 122 }
-//     const nosePosition = { x: 176, y: 184 }
-//     const mouthPosition = { x: 148, y: 212 }
+    return model
+}
 
-//     const canvas = createCanvas(canvasWidth, canvasHeight)
-//     const ctx = canvas.getContext('2d')
+async function createAvatar() {
+    const canvasWidth = 361
+    const canvasHeight = 361
+    const canvasBackgroundColor = '#FFF'
 
-//     ctx.fillStyle = canvasBackgroundColor
-//     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+    const bodyPosition = { x: 87, y: 270 }
+    const hairPosition = { x: 87, y: 69 }
+    const facePosition = { x: 123, y: 122 }
+    const nosePosition = { x: 176, y: 184 }
+    const mouthPosition = { x: 153, y: 212 }
+    const eyePosition = { x: 148, y: 156 }
 
-//     await loadImage('assets/body/body.png').then((image) => {
-//         ctx.drawImage(
-//             image,
-//             bodyPosition.x,
-//             bodyPosition.y,
-//             image.width,
-//             image.height,
-//         )
-//     })
+    const canvas = createCanvas(canvasWidth, canvasHeight)
+    const ctx = canvas.getContext('2d')
 
-//     await loadImage('assets/hair/hair.png').then((image) => {
-//         ctx.drawImage(
-//             image,
-//             hairPosition.x,
-//             hairPosition.y,
-//             image.width,
-//             image.height,
-//         )
-//     })
+    ctx.fillStyle = canvasBackgroundColor
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-//     await loadImage('assets/face/face.png').then((image) => {
-//         ctx.drawImage(
-//             image,
-//             facePosition.x,
-//             facePosition.y,
-//             image.width,
-//             image.height,
-//         )
-//     })
+    const model = random()
 
-//     await loadImage('assets/nose/nose.png').then((image) => {
-//         ctx.drawImage(
-//             image,
-//             nosePosition.x,
-//             nosePosition.y,
-//             image.width,
-//             image.height,
-//         )
-//     })
+    const srcBody = model[0]
+    const srcNose = model[1]
+    const srcHair = model[2]
+    const srcFace = model[3]
+    const srcMouth = model[4]
+    const srcEye = model[5]
 
-//     await loadImage('assets/mouth/mouth.png').then((image) => {
-//         ctx.drawImage(
-//             image,
-//             mouthPosition.x,
-//             mouthPosition.y,
-//             image.width,
-//             image.height,
-//         )
-//     })
+    await loadImage(srcBody).then((image) => {
+        ctx.drawImage(
+            image,
+            bodyPosition.x,
+            bodyPosition.y,
+            image.width,
+            image.height,
+        )
+    })
 
-//     const imageBuffer = canvas.toDataURL()
-//     fs.writeFileSync('./canvas.png', imageBuffer)
-// }
+    await loadImage(srcFace).then((image) => {
+        ctx.drawImage(
+            image,
+            facePosition.x,
+            facePosition.y,
+            image.width,
+            image.height,
+        )
+    })
+
+    await loadImage(srcNose).then((image) => {
+        ctx.drawImage(
+            image,
+            nosePosition.x,
+            nosePosition.y,
+            image.width,
+            image.height,
+        )
+    })
+
+    await loadImage(srcMouth).then((image) => {
+        ctx.drawImage(
+            image,
+            mouthPosition.x,
+            mouthPosition.y,
+            image.width,
+            image.height,
+        )
+    })
+
+    await loadImage(srcHair).then((image) => {
+        ctx.drawImage(
+            image,
+            hairPosition.x,
+            hairPosition.y,
+            image.width,
+            image.height,
+        )
+    })
+
+    await loadImage(srcEye).then((image) => {
+        ctx.drawImage(
+            image,
+            eyePosition.x,
+            eyePosition.y,
+            image.width,
+            image.height,
+        )
+    })
+
+    return canvas.toDataURL()
+}
+
+// createAvatar().then((image) => console.log(image))
+
+export default { createAvatar }

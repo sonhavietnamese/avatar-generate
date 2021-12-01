@@ -1,8 +1,9 @@
+import common from '../utils/common.js'
+
 const generateAvatar = (req, res) => {
-    const welcomeMessage = 'Hello sonha!'
-    res.status(200).send({
-        message: welcomeMessage,
-    })
+    common.createAvatar().then((image) => res.status(200).send({
+        message: image,
+    }))
 }
 
 export default { generateAvatar }

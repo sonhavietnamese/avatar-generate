@@ -1,7 +1,9 @@
 import express from 'express'
+import cors from 'cors'
 import routes from './routes/generate.route.js'
 
 const app = express()
+app.use(cors())
 
 routes(app)
 
